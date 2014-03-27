@@ -21,6 +21,5 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
         ofTrueTypeFont font;
-		shapeString *testShapeString;
-
+        vector <shapeString*> shapeStrings;
 };

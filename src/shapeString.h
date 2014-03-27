@@ -8,7 +8,8 @@ class shapeString
 
         enum DRAWINGMODE{
             BASELINE_LEFT_CORNER = 0,
-            BASELINE_CENTER = 1
+            BASELINE_CENTER = 1,
+            BASELINE_MIDDLE_GLYPH = 2 // This ignores whitespace
         };
 
         shapeString(ofTrueTypeFont _font, string _str);
@@ -30,6 +31,7 @@ class shapeString
 
     protected:
         void calculateShapesAndBounds();
+        void moveCoordinateSystem(int x, int y);
 
         string str;
         int numChar;

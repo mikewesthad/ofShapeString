@@ -25,16 +25,14 @@ void shapeString::setDrawingMode(DRAWINGMODE _drawingMode) {
 
 void shapeString::drawFilled(int x, int y) {
     ofPushMatrix();
-        ofTranslate(x, y);
-        if (drawingMode == BASELINE_CENTER) ofTranslate(-strBoundingBox.width/2, 0);
+        moveCoordinateSystem(x, y);
         for (int c=0; c<charPaths.size(); c++) charPaths[c].draw();
     ofPopMatrix();
 }
 
 void shapeString::drawOutlines(int x, int y){
     ofPushMatrix();
-        ofTranslate(x, y);
-        if (drawingMode == BASELINE_CENTER) ofTranslate(-strBoundingBox.width/2, 0);
+        moveCoordinateSystem(x, y);
         for (int c=0; c<charOutlines.size(); c++) {
             vector <ofPolyline> outline = charOutlines[c];
             for (int o=0; o<outline.size(); o++) outline[o].draw();
@@ -44,18 +42,33 @@ void shapeString::drawOutlines(int x, int y){
 
 void shapeString::drawCharacterBoundingBoxes(int x, int y) {
     ofPushMatrix();
-        ofTranslate(x, y);
-        if (drawingMode == BASELINE_CENTER) ofTranslate(-strBoundingBox.width/2, 0);
+        moveCoordinateSystem(x, y);
         for (int c=0; c<charBoundingBoxes.size(); c++) ofRect(charBoundingBoxes[c]);
     ofPopMatrix();
 }
 
 void shapeString::drawStringBoundingBox(int x, int y) {
     ofPushMatrix();
-        ofTranslate(x, y);
-        if (drawingMode == BASELINE_CENTER) ofTranslate(-strBoundingBox.width/2, 0);
+        moveCoordinateSystem(x, y);
         ofRect(strBoundingBox);
     ofPopMatrix();
+}
+
+void shapeString::moveCoordinateSystem(int x, int y) {
+    ofTranslate(x, y);
+    ofVec3f offset(0, 0, 0);
+    if (drawingMode == BASELINE_CENTER) {
+        offset.x = -strBoundingBox.getCenter().x;
+    }
+    else if (drawingMode == BASELINE_MIDDLE_GLYPH) {
+        int numGlyphs = charBoundingBoxes.size(); // Excludes whitespace
+        offset.x = -charBoundingBoxes[numGlyphs/2].getCenter().x;
+    }
+    else if (drawingMode == BASELINE_LEFT_CORNER) {
+        // This is the position by default
+    }
+    ofTranslate(offset);
+
 }
 
 ofRectangle shapeString::getBoundingBox() {
