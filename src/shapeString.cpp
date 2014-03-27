@@ -42,7 +42,7 @@ void shapeString::drawOutlines(int x, int y){
     ofPopMatrix();
 }
 
-void shapeString::drawBoundingBoxes(int x, int y) {
+void shapeString::drawCharacterBoundingBoxes(int x, int y) {
     ofPushMatrix();
         ofTranslate(x, y);
         if (drawingMode == BASELINE_CENTER) ofTranslate(-strBoundingBox.width/2, 0);
@@ -50,7 +50,7 @@ void shapeString::drawBoundingBoxes(int x, int y) {
     ofPopMatrix();
 }
 
-void shapeString::drawBoundingBox(int x, int y) {
+void shapeString::drawStringBoundingBox(int x, int y) {
     ofPushMatrix();
         ofTranslate(x, y);
         if (drawingMode == BASELINE_CENTER) ofTranslate(-strBoundingBox.width/2, 0);

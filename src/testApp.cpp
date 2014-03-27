@@ -19,8 +19,8 @@ void testApp::draw(){
     ofSetColor(255);
     testShapeString->drawFilled(ofGetWidth()/2, 100);
     testShapeString->drawOutlines(ofGetWidth()/2, 200);
-    testShapeString->drawBoundingBoxes(ofGetWidth()/2, 300);
-    testShapeString->drawBoundingBox(ofGetWidth()/2, 400);
+    testShapeString->drawCharacterBoundingBoxes(ofGetWidth()/2, 300);
+    testShapeString->drawStringBoundingBox(ofGetWidth()/2, 400);
 
 }
 

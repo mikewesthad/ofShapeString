@@ -21,8 +21,8 @@ class shapeString
 
         void drawFilled(int x, int y);
         void drawOutlines(int x, int y);
-        void drawBoundingBox(int x, int y);
-        void drawBoundingBoxes(int x, int y);
+        void drawStringBoundingBox(int x, int y);
+        void drawCharacterBoundingBoxes(int x, int y);
 
         ofRectangle getBoundingBox();
 
